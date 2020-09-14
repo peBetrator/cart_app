@@ -20,4 +20,16 @@ export class ProductsService {
   async findAll(): Promise<Product[]> {
     return this.productModel.find().exec();
   }
+
+  async findOne(id: string): Promise<Product> {
+    return this.productModel.findOne({ _id: id });
+  }
+
+  async delete(id: string): Promise<Product> {
+    return await this.productModel.findByIdAndRemove(id);
+  }
+
+  async update(id: string, product: Product): Promise<Product> {
+    return await this.productModel.findByIdAndUpdate(id, product, { new: true });
+  }
 }

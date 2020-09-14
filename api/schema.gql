@@ -5,6 +5,8 @@
 
 type Mutation {
   addProduct(input: ProductInput!): ProductType!
+  updateProduct(input: ProductInput!, id: String!): ProductType!
+  deleteProduct(id: String!): ProductType!
 }
 
 input ProductInput {
@@ -23,4 +25,5 @@ type ProductType {
 type Query {
   hello: String!
   products: [ProductType!]!
+  product(id: String!): ProductType!
 }

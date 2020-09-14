@@ -14,7 +14,7 @@ import { ProductsModule } from './products/products.module';
       autoSchemaFile: 'schema.gql',
     }),
     MongooseModule.forRoot(
-      'mongodb+srv://dbUser:dbUserPassword@cluster0-h5e1r.mongodb.net/test?retryWrites=true&w=majority',
+      'mongodb+srv://dbUser:dbUserPassword@cluster0.h5e1r.mongodb.net/test?retryWrites=true&w=majority',
     ),
   ],
   controllers: [AppController],
