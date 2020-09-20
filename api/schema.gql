@@ -3,10 +3,21 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+input CategoryInput {
+  title: String!
+}
+
+type CategoryType {
+  id: ID!
+  title: String!
+  products: [ProductType!]!
+}
+
 type Mutation {
   addProduct(input: ProductInput!): ProductType!
   updateProduct(input: ProductInput!, id: String!): ProductType!
   deleteProduct(id: String!): ProductType!
+  createCategory(input: CategoryInput!): CategoryType!
 }
 
 input ProductInput {
@@ -26,4 +37,5 @@ type Query {
   hello: String!
   products: [ProductType!]!
   product(id: String!): ProductType!
+  categories: [CategoryType!]!
 }
