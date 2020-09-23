@@ -3,13 +3,21 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+enum AllowedCategories {
+  LAPTOP
+  GPU
+  CPU
+  SMARTPHONE
+  SOFTWARE
+}
+
 input CategoryInput {
-  title: String!
+  title: AllowedCategories!
 }
 
 type CategoryType {
   id: ID!
-  title: String!
+  title: AllowedCategories!
   products: [ProductType!]!
 }
 
@@ -23,19 +31,19 @@ type Mutation {
 input ProductInput {
   title: String!
   price: Int!
-  category: String!
+  category: AllowedCategories!
 }
 
 type ProductType {
   id: ID!
   title: String!
   price: Int!
-  category: String!
+  category: AllowedCategories!
 }
 
 type Query {
-  hello: String!
   products: [ProductType!]!
   product(id: String!): ProductType!
   categories: [CategoryType!]!
+  category(id: String!): CategoryType!
 }

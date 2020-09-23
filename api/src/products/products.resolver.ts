@@ -1,16 +1,11 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { ProductType } from './dto/add-product.dto';
+import { ProductType } from './dto/product.dto';
 import { ProductInput } from './inputs/product.input';
 import { ProductsService } from './products.service';
 
-@Resolver()
+@Resolver(of => ProductType)
 export class ProductResolver {
   constructor(private readonly productService: ProductsService) {}
-
-  @Query(() => String)
-  async hello() {
-    return 'hello';
-  }
 
   @Query(() => [ProductType])
   async products() {

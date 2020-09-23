@@ -14,6 +14,10 @@ export class CategoryService {
     return this.categoryModel.find().exec();
   }
 
+  async findOne(id: string): Promise<Category> {
+    return this.categoryModel.findById(id);
+  }
+
   async createCategory(category: CategoryInput): Promise<Category> {
     const createdCategory = new this.categoryModel(category);
     return createdCategory.save();

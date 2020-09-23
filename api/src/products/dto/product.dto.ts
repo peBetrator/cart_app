@@ -1,3 +1,4 @@
+import { AllowedCategories } from '../../category/enums/category.enum';
 import { ObjectType, Field, Int, ID } from 'type-graphql';
 
 @ObjectType()
@@ -11,6 +12,6 @@ export class ProductType {
   @Field(() => Int)
   readonly price: number;
 
-  @Field()
-  readonly category: string;
+  @Field(() => AllowedCategories)
+  readonly category: AllowedCategories;
 }

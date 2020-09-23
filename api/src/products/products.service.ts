@@ -5,6 +5,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 import { Product } from './interfaces/product.interface';
+import { ProductType } from './dto/product.dto';
+import { AllowedCategories } from 'src/category/enums/category.enum';
 
 @Injectable()
 export class ProductsService {
@@ -22,7 +24,15 @@ export class ProductsService {
   }
 
   async findOne(id: string): Promise<Product> {
-    return this.productModel.findOne({ _id: id });
+    return this.productModel.findById(id);
+  }
+
+  async findByCategory(id: AllowedCategories): Promise<Product[]> {
+    return this.productModel
+      .find()
+      .where('category')
+      .eq(id)
+      .exec();
   }
 
   async delete(id: string): Promise<Product> {
@@ -30,6 +40,8 @@ export class ProductsService {
   }
 
   async update(id: string, product: Product): Promise<Product> {
-    return await this.productModel.findByIdAndUpdate(id, product, { new: true });
+    return await this.productModel.findByIdAndUpdate(id, product, {
+      new: true,
+    });
   }
 }
