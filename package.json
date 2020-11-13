@@ -1,0 +1,21 @@
+{
+  "name": "cart_app",
+  "version": "1.0.0",
+  "description": "E-Commerce site with NestJs | NextJs",
+  "main": "index.js",
+  "scripts": {
+    "api-install": "cd api && npm install",
+    "client-install": "cd client && npm install",
+    "install-all-deps": "concurrently \"npm run api-install\" \"npm run client-install\"",
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peBetrator/cart_app.git"
+  },
+  "author": "mnegal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/peBetrator/cart_app/issues"
+  },
+  "homepage": "https://github.com/peBetrator/cart_app#readme"
+}
