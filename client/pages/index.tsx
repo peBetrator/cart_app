@@ -1,47 +1,34 @@
-import { gql, useQuery } from '@apollo/client';
-import { initializeApollo } from 'lib/apolloClient';
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+import { useQuery } from '@apollo/client';
+import { makeStyles } from '@material-ui/core/styles';
+import ProductPreview from 'components/products/ProductPreview';
+import { ProductType } from 'components/products/types';
+import { initializeApollo } from 'utilities/apolloClient';
+import { ALL_PRODUCTS_QUERY } from '../graphql/queries';
 
-export const ALL_PRODUCTS_QUERY = gql`
-  query {
-    products {
-      id
-      title
-      price
-      category
-    }
-  }
-`;
-
-interface ProductType {
-  id: string;
-  title: string;
-  price: number;
-  category: string;
-}
+const useStyles = makeStyles({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+});
 
 interface ProductTypes {
   products: ProductType[];
 }
 
 export default function Home() {
+  const classes = useStyles();
   const {
     loading,
     error,
     data: { products },
   } = useQuery<ProductTypes>(ALL_PRODUCTS_QUERY);
 
-  if (loading) return <div className={styles.container}>Loading...</div>;
+  if (loading) return <div className={classes.container}>Loading...</div>;
   return (
-    <div className={styles.container}>
-      {products.map(({ id, title, price, category }) => (
-        <>
-          <span>{id}</span>
-          <span>{title}</span>
-          <span>{price}</span>
-          <span>{category}</span>
-        </>
+    <div className={classes.container}>
+      {products.map((product, index) => (
+        <ProductPreview key={index} {...product} />
       ))}
     </div>
   );
