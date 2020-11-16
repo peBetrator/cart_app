@@ -6,7 +6,7 @@
   "scripts": {
     "api-install": "cd api && npm install",
     "client-install": "cd client && npm install",
-    "install-all-deps": "concurrently \"npm run api-install\" \"npm run client-install\"",
+    "install-all-deps": "concurrently \"npm run api-install\" \"npm run client-install\""
   },
   "repository": {
     "type": "git",
