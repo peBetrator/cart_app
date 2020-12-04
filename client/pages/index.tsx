@@ -1,9 +1,11 @@
-import { useQuery } from '@apollo/client';
+import { GetServerSideProps } from 'next';
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import ProductPreview from 'components/products/ProductPreview';
 import { ProductType } from 'components/products/types';
 import { initializeApollo } from 'utilities/apolloClient';
 import { ALL_PRODUCTS_QUERY } from '../graphql/queries';
+import Link from 'next/link';
 
 const useStyles = makeStyles({
   container: {
@@ -16,34 +18,36 @@ interface ProductTypes {
   products: ProductType[];
 }
 
-export default function Home() {
+export default function Home({ products }): React.ReactElement {
   const classes = useStyles();
-  const {
-    loading,
-    error,
-    data: { products },
-  } = useQuery<ProductTypes>(ALL_PRODUCTS_QUERY);
 
-  if (loading) return <div className={classes.container}>Loading...</div>;
   return (
-    <div className={classes.container}>
-      {products.map((product, index) => (
-        <ProductPreview key={index} {...product} />
-      ))}
-    </div>
+    <>
+      <Link href="/product/add" passHref>
+        <Button variant="contained">Add</Button>
+      </Link>
+      <div className={classes.container}>
+        {products.map((product, index) => (
+          <ProductPreview key={index} {...product} />
+        ))}
+      </div>
+    </>
   );
 }
 
-export async function getStaticProps() {
+export const getServerSideProps: GetServerSideProps = async () => {
   const apolloClient = initializeApollo();
 
-  await apolloClient.query({
+  const {
+    data: { products },
+    errors,
+  } = await apolloClient.query({
     query: ALL_PRODUCTS_QUERY,
   });
 
   return {
     props: {
-      initialApolloState: apolloClient.cache.extract(),
+      products,
     },
   };
-}
+};

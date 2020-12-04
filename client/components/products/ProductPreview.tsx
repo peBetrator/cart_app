@@ -4,6 +4,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import Link from 'next/link';
 
 import { ProductType } from './types';
 
@@ -42,7 +43,9 @@ export default function ProductPreview({ id, title, category, price }: ProductTy
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Button size="small">
+          <Link href={`/product/${id}`}>Learn More</Link>
+        </Button>
       </CardActions>
     </Card>
   );

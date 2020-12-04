@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { ApolloProvider } from '@apollo/client';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -7,7 +8,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import theme from 'utilities/theme';
 import { useApollo } from '../utilities/apolloClient';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
   const apolloClient = useApollo(pageProps.initialApolloState);
 
   useEffect(() => {
