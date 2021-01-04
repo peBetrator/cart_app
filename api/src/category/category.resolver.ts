@@ -35,6 +35,11 @@ export class CategoryResolver {
     return this.categoryService.createCategory(input);
   }
 
+  @Mutation(() => ProductType)
+  async deleteCategory(@Args('id') id: string): Promise<CategoryInput> {
+    return this.categoryService.deleteCategory(id);
+  }
+
   @ResolveProperty(() => [ProductType])
   async products(@Parent() category: CategoryType) {
     const { title } = category;

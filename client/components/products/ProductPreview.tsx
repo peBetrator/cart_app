@@ -11,7 +11,7 @@ import { ProductType } from './types';
 const useStyles = makeStyles({
   root: {
     margin: '2em',
-    minWidth: 275,
+    minWidth: 240,
   },
   bullet: {
     display: 'inline-block',

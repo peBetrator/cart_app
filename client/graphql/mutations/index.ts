@@ -10,3 +10,12 @@ export const ADD_PRODUCT_MUTATION = gql`
     }
   }
 `;
+
+export const ADD_CATEGORY_MUTATION = gql`
+  mutation createCategory($category: CategoryInput!) {
+    createCategory(input: $category) {
+      id
+      title
+    }
+  }
+`;

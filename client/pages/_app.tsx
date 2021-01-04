@@ -7,6 +7,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 
 import theme from 'utilities/theme';
 import { useApollo } from '../utilities/apolloClient';
+import { Navbar } from '../components';
 
 function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
   const apolloClient = useApollo(pageProps.initialApolloState);
@@ -29,7 +30,9 @@ function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
-          <Component {...pageProps} />
+          <Navbar>
+            <Component {...pageProps} />
+          </Navbar>
         </ThemeProvider>
       </ApolloProvider>
     </>

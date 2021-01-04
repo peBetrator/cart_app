@@ -30,20 +30,20 @@ const useStyles = makeStyles({
 const initialState = {
   title: '',
   category: '',
-  price: undefined,
+  price: '',
 };
 
 const AddProduct = ({ categories }): React.ReactElement => {
   const classes = useStyles();
-  const [state, dispatch] = useReducer((state, { field, value }) => ({ ...state, [field]: value }), initialState);
+  const [state, setFieldValue] = useReducer((state, { field, value }) => ({ ...state, [field]: value }), initialState);
   const [createPost] = useMutation(ADD_PRODUCT_MUTATION, {
     onCompleted(data) {
-      Object.keys(initialState).map(field => dispatch({ field, value: initialState[field] }));
+      Object.keys(initialState).map(field => setFieldValue({ field, value: initialState[field] }));
     },
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    dispatch({ field: event.target.name, value: event.target.value });
+    setFieldValue({ field: event.target.name, value: event.target.value });
   };
 
   const handleSubmit = (event: React.FormEvent<EventTarget>): void => {
