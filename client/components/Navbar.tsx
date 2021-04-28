@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function Navbar({ children }): React.ReactElement {
+export default function Navbar(): React.ReactElement {
   const classes = useStyles();
   return (
     <>
@@ -45,7 +45,6 @@ export default function Navbar({ children }): React.ReactElement {
           </Container>
         </Toolbar>
       </AppBar>
-      {children}
     </>
   );
 }
