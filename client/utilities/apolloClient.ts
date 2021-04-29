@@ -16,7 +16,9 @@ function createApolloClient(): ApolloClient<NormalizedCacheObject> {
         Query: {
           fields: {
             products: {
-              merge: true,
+              merge(existing = [], incoming: any[]) {
+                return incoming;
+              },
             },
           },
         },
