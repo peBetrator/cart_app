@@ -1,6 +1,7 @@
-import Link from 'next/link';
-import { useState } from 'react';
 import { useMutation } from '@apollo/client';
+import Link from 'next/link';
+import { NextRouter, useRouter } from 'next/router';
+import { useState } from 'react';
 
 import Backdrop from '@material-ui/core/Backdrop';
 import Box from '@material-ui/core/Box';
@@ -13,6 +14,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography';
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 
 import { DELETE_PRODUCT_MUTATION } from '../../graphql/mutations';
 import { useStyles } from './styles';
@@ -33,8 +35,13 @@ export default function ProductPreview({
 
   const [open, setOpen] = useState<boolean>(false);
   const [deleteProduct] = useMutation<ProductType>(DELETE_PRODUCT_MUTATION);
+  const router: NextRouter = useRouter();
 
   const toggleModal = (): void => setOpen(!open);
+
+  const handleEditProduct = (): void => {
+    router.push(`/product/${id}/edit`);
+  };
 
   const handleDeleteProduct = (): void => {
     deleteProduct({
@@ -50,6 +57,9 @@ export default function ProductPreview({
       <Card className={classes.root}>
         <CardContent className={classes.content}>
           <Box className={classes.actions}>
+            <IconButton onClick={handleEditProduct}>
+              <EditIcon style={{ color: 'orange' }} />
+            </IconButton>
             <IconButton onClick={toggleModal}>
               <DeleteIcon style={{ color: 'red' }} />
             </IconButton>

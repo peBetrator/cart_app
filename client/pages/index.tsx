@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next';
+import { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 
 import Box from '@material-ui/core/Box';
@@ -7,8 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { ProductPreview } from '../components';
 import { ProductType } from '../components/products/types';
-import { ALL_PRODUCTS_QUERY } from '../graphql/queries';
-import { initializeApollo } from '../utilities/apolloClient';
+import { PRODUCTS_QUERY } from '../graphql/queries';
 
 const useStyles = makeStyles({
   container: {
@@ -23,8 +22,11 @@ interface ProductTypes {
 
 export default function Home(): React.ReactElement {
   const classes = useStyles();
+  const { loading, error, data: { products } = {}, refetch } = useQuery<ProductTypes>(PRODUCTS_QUERY);
 
-  const { loading, error, data: { products } = {}, refetch } = useQuery<ProductTypes>(ALL_PRODUCTS_QUERY);
+  useEffect(() => {
+    refetch();
+  }, []);
 
   if (loading) {
     return null;
@@ -40,20 +42,3 @@ export default function Home(): React.ReactElement {
     </Container>
   );
 }
-
-// export const getServerSideProps: GetServerSideProps = async () => {
-//   const apolloClient = initializeApollo();
-
-//   const {
-//     data: { products },
-//     errors,
-//   } = await apolloClient.query({
-//     query: ALL_PRODUCTS_QUERY,
-//   });
-
-//   return {
-//     props: {
-//       products,
-//     },
-//   };
-// };
