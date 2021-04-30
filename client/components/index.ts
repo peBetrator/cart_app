@@ -1,5 +1,5 @@
 import Navbar from './Navbar';
 import ProductPreview from './products/ProductPreview';
+import Product from './products/Product';
 
-export { ProductPreview, Navbar };
-
+export { Product, ProductPreview, Navbar };

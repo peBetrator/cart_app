@@ -14,6 +14,7 @@ export const PRODUCTS_QUERY = gql`
 export const PRODUCT_QUERY = gql`
   query Product($id: String!) {
     product(id: $id) {
+      id
       title
       category
       price
